@@ -15,14 +15,22 @@ from .api.teamspaces import Teamspaces
 from .api.users import Users
 from .api.work_item_properties import WorkItemProperties
 from .api.work_item_relation_definitions import WorkItemRelationDefinitions
+from .api.work_item_type_governance import WorkItemTypeGovernance
 from .api.work_item_types import WorkItemTypes
 from .api.work_items import WorkItems
-from .api.workflows import Workflows, WorkflowStates, WorkflowTransitions
+from .api.workflows import (
+    ProjectWorkflowTransitionHooks,
+    Workflows,
+    WorkflowStates,
+    WorkflowTransitions,
+)
 from .api.workspace_project_labels import WorkspaceProjectLabels
 from .api.workspace_project_states import WorkspaceProjectStates
+from .api.workspace_states import WorkspaceStates
 from .api.workspace_templates import WorkspaceTemplates
 from .api.workspace_work_item_properties import WorkspaceWorkItemProperties
 from .api.workspace_work_item_types import WorkspaceWorkItemTypes
+from .api.workspace_workflows import WorkspaceWorkflows
 from .api.workspaces import Workspaces
 from .client import (
     OAuthAuthorizationParams,
@@ -44,16 +52,51 @@ from .models.project_templates import (
     WorkItemTemplate,
 )
 from .models.projects import ProjectFeature, ProjectMember
+from .models.states import CreateWorkspaceState, UpdateWorkspaceState
+from .models.work_item_type_governance import (
+    CreateWorkItemTypeWorkflowPins,
+    GovernancePreview,
+    ProjectTypeWorkflow,
+    ProjectWorkflowPickResult,
+    SetProjectWorkflowPick,
+    TypeGovernance,
+    TypeGovernancePreviewRequest,
+    UpdateTypeGovernance,
+    WorkflowFallbackPreviewRequest,
+    WorkItemTypeWorkflowPin,
+)
 from .models.workflows import (
     AttachWorkflowStates,
     CreateWorkflow,
     CreateWorkflowTransition,
+    CreateWorkflowTransitionHook,
+    SubmitWorkItemApproval,
     UpdateWorkflow,
+    UpdateWorkflowState,
     UpdateWorkflowTransition,
+    UpdateWorkflowTransitionHook,
     Workflow,
+    WorkflowActivity,
     WorkflowTransition,
+    WorkflowTransitionHook,
+    WorkItemApprovalResult,
 )
-from .models.workspaces import WorkspaceMember
+from .models.workspace_workflows import (
+    AddWorkspaceWorkflowStates,
+    CreateWorkspaceWorkflow,
+    CreateWorkspaceWorkflowTransition,
+    PaginatedWorkspaceWorkflowResponse,
+    RemoveWorkspaceWorkflowState,
+    UpdateWorkspaceWorkflow,
+    UpdateWorkspaceWorkflowState,
+    UpdateWorkspaceWorkflowTransition,
+    WorkspaceWorkflow,
+    WorkspaceWorkflowState,
+    WorkspaceWorkflowTransition,
+    WorkspaceWorkflowUsage,
+    WorkspaceWorkflowUsageProject,
+)
+from .models.workspaces import WorkspaceFeature, WorkspaceMember
 
 __all__ = [
     "PlaneClient",
@@ -83,12 +126,16 @@ __all__ = [
     "ProjectTemplates",
     "ProjectWorkItemTemplates",
     "ProjectPageTemplates",
+    "ProjectWorkflowTransitionHooks",
     "Releases",
     "WorkspaceTemplates",
     "WorkspaceWorkItemTypes",
     "WorkspaceWorkItemProperties",
     "WorkspaceProjectLabels",
     "WorkspaceProjectStates",
+    "WorkspaceStates",
+    "WorkspaceWorkflows",
+    "WorkItemTypeGovernance",
     "PlaneError",
     "ConfigurationError",
     "HttpError",
@@ -102,11 +149,47 @@ __all__ = [
     "CreateWorkflow",
     "UpdateWorkflow",
     "AttachWorkflowStates",
+    "UpdateWorkflowState",
+    "WorkflowActivity",
     "WorkflowTransition",
     "CreateWorkflowTransition",
     "UpdateWorkflowTransition",
+    "WorkflowTransitionHook",
+    "CreateWorkflowTransitionHook",
+    "UpdateWorkflowTransitionHook",
+    "SubmitWorkItemApproval",
+    "WorkItemApprovalResult",
+    # Workspace state models
+    "CreateWorkspaceState",
+    "UpdateWorkspaceState",
+    # Workspace workflow models
+    "WorkspaceWorkflow",
+    "WorkspaceWorkflowState",
+    "WorkspaceWorkflowTransition",
+    "PaginatedWorkspaceWorkflowResponse",
+    "CreateWorkspaceWorkflow",
+    "UpdateWorkspaceWorkflow",
+    "AddWorkspaceWorkflowStates",
+    "UpdateWorkspaceWorkflowState",
+    "RemoveWorkspaceWorkflowState",
+    "CreateWorkspaceWorkflowTransition",
+    "UpdateWorkspaceWorkflowTransition",
+    "WorkspaceWorkflowUsage",
+    "WorkspaceWorkflowUsageProject",
+    # Type governance models
+    "TypeGovernance",
+    "UpdateTypeGovernance",
+    "TypeGovernancePreviewRequest",
+    "GovernancePreview",
+    "WorkItemTypeWorkflowPin",
+    "CreateWorkItemTypeWorkflowPins",
+    "ProjectTypeWorkflow",
+    "SetProjectWorkflowPick",
+    "ProjectWorkflowPickResult",
+    "WorkflowFallbackPreviewRequest",
     "ProjectFeature",
     "ProjectMember",
+    "WorkspaceFeature",
     "WorkspaceMember",
     # Project template models
     "WorkItemTemplate",
