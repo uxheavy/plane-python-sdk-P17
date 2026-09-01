@@ -1,7 +1,7 @@
 from unittest.mock import Mock
 
+from plane import AgentMembershipRequest, AgentMembershipResponse
 from plane.client import PlaneClient
-from plane.models.workspaces import AgentMembershipRequest
 
 
 def test_apply_agent_membership_sends_idempotency_header() -> None:
@@ -33,3 +33,17 @@ def test_apply_agent_membership_sends_idempotency_header() -> None:
     call = client.workspaces.session.put.call_args
     assert call.args[0].endswith("/workspaces/workspace/agent-memberships/agent-a/")
     assert call.kwargs["headers"]["Idempotency-Key"] == "operation-1"
+
+
+def test_agent_membership_response_preserves_new_fields() -> None:
+    response = AgentMembershipResponse(
+        membership_id="membership",
+        user_id="user",
+        workspace_id="workspace",
+        state="active",
+        project_ids=[],
+        replayed=False,
+        lifecycle_revision=2,
+    )
+
+    assert response.lifecycle_revision == 2

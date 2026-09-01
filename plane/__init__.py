@@ -196,6 +196,8 @@ __all__ = [
     "ProjectMember",
     "WorkspaceFeature",
     "WorkspaceMember",
+    "AgentMembershipRequest",
+    "AgentMembershipResponse",
     # Project template models
     "WorkItemTemplate",
     "CreateWorkItemTemplate",

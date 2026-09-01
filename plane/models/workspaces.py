@@ -12,6 +12,8 @@ class AgentMembershipRequest(BaseModel):
 
 
 class AgentMembershipResponse(BaseModel):
+    model_config = ConfigDict(extra="allow", populate_by_name=True)
+
     membership_id: str
     user_id: str
     workspace_id: str
