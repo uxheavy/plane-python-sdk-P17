@@ -4,6 +4,23 @@ from .pagination import PaginatedResponse
 from .users import UserLite
 
 
+class AgentMembershipRequest(BaseModel):
+    display_name: str
+    state: str = "active"
+    project_ids: list[str]
+    credential_action: str = "ensure"
+
+
+class AgentMembershipResponse(BaseModel):
+    membership_id: str
+    user_id: str
+    workspace_id: str
+    state: str
+    project_ids: list[str]
+    credential: str | None = None
+    replayed: bool
+
+
 class WorkspaceMember(UserLite):
     """Workspace member model.
 
