@@ -52,10 +52,17 @@ class BaseResource:
         )
         return self._handle_response(response)
 
-    def _put(self, endpoint: str, data: Mapping[str, Any] | None = None) -> Any:
+    def _put(
+        self,
+        endpoint: str,
+        data: Mapping[str, Any] | None = None,
+        headers: Mapping[str, str] | None = None,
+    ) -> Any:
         url = self._build_url(endpoint)
+        request_headers = self._headers()
+        request_headers.update(headers or {})
         response = self.session.put(
-            url, headers=self._headers(), json=data, timeout=self.config.timeout
+            url, headers=request_headers, json=data, timeout=self.config.timeout
         )
         return self._handle_response(response)
 

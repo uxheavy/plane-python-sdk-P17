@@ -4,6 +4,8 @@ from typing import Any
 
 from ..models.query_params import MemberListQueryParams, MemberQueryParams
 from ..models.workspaces import (
+    AgentMembershipRequest,
+    AgentMembershipResponse,
     PaginatedWorkspaceMemberResponse,
     ProjectRoleDistribution,
     WorkspaceFeature,
@@ -86,3 +88,23 @@ class Workspaces(BaseResource):
         """
         response = self._patch(f"{workspace_slug}/features", data.model_dump(exclude_none=True))
         return WorkspaceFeature.model_validate(response)
+
+    def apply_agent_membership(
+        self,
+        workspace_slug: str,
+        agent_key: str,
+        data: AgentMembershipRequest,
+        *,
+        idempotency_key: str,
+    ) -> AgentMembershipResponse:
+        """Reconcile one Plane-native agent membership.
+
+        ``credential`` is returned only when Plane creates or rotates it. Callers
+        must store it as a secret and must not expect it on idempotent replay.
+        """
+        response = self._put(
+            f"{workspace_slug}/agent-memberships/{agent_key}",
+            data.model_dump(),
+            headers={"Idempotency-Key": idempotency_key},
+        )
+        return AgentMembershipResponse.model_validate(response)

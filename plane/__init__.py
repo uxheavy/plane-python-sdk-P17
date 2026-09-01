@@ -96,7 +96,12 @@ from .models.workspace_workflows import (
     WorkspaceWorkflowUsage,
     WorkspaceWorkflowUsageProject,
 )
-from .models.workspaces import WorkspaceFeature, WorkspaceMember
+from .models.workspaces import (
+    AgentMembershipRequest,
+    AgentMembershipResponse,
+    WorkspaceFeature,
+    WorkspaceMember,
+)
 
 __all__ = [
     "PlaneClient",
@@ -191,6 +196,8 @@ __all__ = [
     "ProjectMember",
     "WorkspaceFeature",
     "WorkspaceMember",
+    "AgentMembershipRequest",
+    "AgentMembershipResponse",
     # Project template models
     "WorkItemTemplate",
     "CreateWorkItemTemplate",
